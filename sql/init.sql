@@ -2,13 +2,15 @@ create table if not exists client_jn
 (
     id                SERIAL PRIMARY KEY,
     name              varchar(128) NOT NULL,
+    password          varchar(128) NOT NULL,
+
     registration_date TIMESTAMP
 );
 
 create table if not exists loyalty_program_jn
 (
     id           SERIAL PRIMARY KEY,
-    client_id    INTEGER NOT NULL REFERENCES client_jn (id),
+    client_id    INTEGER UNIQUE NOT NULL REFERENCES client_jn (id),
     bonus_points FLOAT   NOT NULL DEFAULT (0)
 );
 
@@ -75,17 +77,17 @@ create table if not exists syrup_ref
 
 create table if not exists coffee_size_ref
 (
-    id     SERIAL PRIMARY KEY,
-    name   VARCHAR(128) NOT NULL,
-    volume INTEGER      NOT NULL CHECK ( volume > 0)
+    id    SERIAL PRIMARY KEY,
+    name  VARCHAR(128) NOT NULL,
+    price FLOAT        NOT NULL CHECK ( price > 0)
 );
 
 create table if not exists coffee_ref
 (
     id             SERIAL PRIMARY KEY,
     beans_id       INTEGER NOT NULL REFERENCES beans_ref (id) ON DELETE CASCADE,
-    milk_id        INTEGER NOT NULL REFERENCES milk_ref (id) ON DELETE CASCADE,
-    syrup_id       INTEGER NOT NULL REFERENCES syrup_ref (id) ON DELETE CASCADE,
+    milk_id        INTEGER REFERENCES milk_ref (id) ON DELETE CASCADE,
+    syrup_id       INTEGER REFERENCES syrup_ref (id) ON DELETE CASCADE,
     coffee_size_id INTEGER NOT NULL REFERENCES coffee_size_ref (id) ON DELETE CASCADE
 );
 
