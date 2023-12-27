@@ -172,7 +172,7 @@ BEGIN
     FROM pie_order_jn
     WHERE order_id = in_order_id;
 
-    SELECT COALESCE(SUM(calculate_coffee_price(coffee_id)), 0)
+    SELECT COALESCE(SUM(calculate_coffee_price(coffee_id)), 0) + v_total_price
     INTO v_total_price
     FROM coffee_order_jn
     WHERE order_id = in_order_id;
