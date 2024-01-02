@@ -69,7 +69,7 @@ $$ LANGUAGE plpgsql;
 
 
 -- Посчитать цену кофе
-CREATE OR REPLACE FUNCTION calculate_coffee_price(coffee_id INTEGER)
+CREATE OR REPLACE FUNCTION calculate_coffee_price(p_coffee_id INTEGER)
     RETURNS FLOAT AS
 $$
 DECLARE
@@ -82,7 +82,12 @@ BEGIN
                              JOIN coffee_size_ref ON coffee_ref.coffee_size_id = coffee_size_ref.id
                              LEFT JOIN milk_ref ON coffee_ref.milk_id = milk_ref.id
                              LEFT JOIN syrup_ref ON coffee_ref.syrup_id = syrup_ref.id
-                    WHERE coffee_ref.id = coffee_id);
+                    WHERE coffee_ref.id = p_coffee_id);
+
+    total_price := total_price * (select max(coalesce(coffee_sale_ref.multiplier, 1))
+                                  from coffee_sale_ref
+                                           join coffee_ref on coffee_ref.id = coffee_sale_ref.coffee_id
+                                  where coffee_ref.id = p_coffee_id);
 
     RETURN total_price;
 END;
