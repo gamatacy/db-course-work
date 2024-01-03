@@ -1,6 +1,7 @@
 package com.coffeeshop.api.controller;
 
 import com.coffeeshop.api.dto.allergen.AllergenResponseDto;
+import com.coffeeshop.api.mapper.AllergenMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,6 +15,8 @@ import java.util.List;
 @RequestMapping("/api/allergen")
 @RequiredArgsConstructor
 public class AllergenController {
+
+    private final AllergenMapper allergenMapper;
 
     @GetMapping("/milk")
     @Operation(summary = "Аллергены молока")

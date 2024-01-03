@@ -6,10 +6,7 @@ import com.coffeeshop.api.dto.pie.PieResponseDto;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,7 +17,7 @@ public class PieController {
 
     @PostMapping()
     @Operation(summary = "Создать кастомный пирожок")
-    public PieResponseDto createPie(@Valid PieRequestDto pieRequestDto) {
+    public PieResponseDto createPie(@Valid @RequestBody PieRequestDto pieRequestDto) {
         return null;
     }
 

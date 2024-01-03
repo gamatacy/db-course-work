@@ -4,6 +4,7 @@ import com.coffeeshop.api.dto.coffee.CoffeeRequestDto;
 import com.coffeeshop.api.dto.pie.PieRequestDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotNull;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;

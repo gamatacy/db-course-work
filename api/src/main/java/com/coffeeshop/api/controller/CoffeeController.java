@@ -3,13 +3,11 @@ package com.coffeeshop.api.controller;
 import com.coffeeshop.api.dto.AdditiveResponseDto;
 import com.coffeeshop.api.dto.coffee.CoffeeRequestDto;
 import com.coffeeshop.api.dto.coffee.CoffeeResponseDto;
+import com.coffeeshop.api.mapper.CoffeeMapper;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -18,9 +16,11 @@ import java.util.List;
 @RequiredArgsConstructor
 public class CoffeeController {
 
+    private final CoffeeMapper coffeeMapper;
+
     @PostMapping()
     @Operation(summary = "Создать кофе")
-    public CoffeeResponseDto createCoffee(@Valid CoffeeRequestDto coffeeRequestDto) {
+    public CoffeeResponseDto createCoffee(@Valid @RequestBody CoffeeRequestDto coffeeRequestDto) {
         return null;
     }
 
@@ -54,7 +54,6 @@ public class CoffeeController {
     public List<CoffeeResponseDto> getCoffeeWithSale() {
         return null;
     }
-
 
 
 }

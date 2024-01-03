@@ -2,6 +2,7 @@ package com.coffeeshop.api.controller;
 
 import com.coffeeshop.api.dto.order.OrderRequestDto;
 import com.coffeeshop.api.dto.order.OrderResponseDto;
+import com.coffeeshop.api.repository.OrderRepository;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -12,9 +13,11 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class OrderController {
 
+    private final OrderRepository orderRepository;
+
     @PostMapping
     @Operation(summary = "Создать заказ")
-    public OrderResponseDto createOrder(@Valid OrderRequestDto orderRequestDto) {
+    public OrderResponseDto createOrder(@Valid @RequestBody OrderRequestDto orderRequestDto) {
         return null;
     }
 
