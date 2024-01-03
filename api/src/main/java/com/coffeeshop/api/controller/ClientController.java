@@ -26,7 +26,6 @@ public class ClientController {
     @PostMapping("/registration")
     @Operation(summary = "Регистрация клиента")
     public ClientResponseDto registerClient(@Valid @RequestBody ClientRequestDto clientRequestDto) throws Exception {
-        System.out.println(clientRequestDto);
         ClientEntity client = clientService.register(clientRequestDto.getName(), clientRequestDto.getPassword());
         return clientMapper.clientEntityToClientResponseDto(client);
     }

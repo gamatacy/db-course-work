@@ -19,7 +19,7 @@ public class FillingEntity {
     private Long id;
 
     @Column(name = "name", nullable = false)
-    private String sort;
+    private String name;
 
     @Column(name = "price", nullable = false)
     private Float price;

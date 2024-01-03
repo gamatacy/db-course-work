@@ -42,6 +42,6 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
     @Query(value = """
             SELECT add_to_favorite_coffee(:id, :beans_id, :milk_id, :syrup_id, :size_id)
             """, nativeQuery = true)
-    void saveFavouriteCoffee(@Param("id") Integer id, @Param("milk_id") Integer milk, @Param("beans_id") Integer beans, @Param("syrup_id") Integer syrup, @Param("size_id") Integer size);
+    void saveFavouriteCoffee(@Param("id") Integer id, @Param("beans_id") Integer beans, @Param("milk_id") Integer milk, @Param("syrup_id") Integer syrup, @Param("size_id") Integer size);
 
 }

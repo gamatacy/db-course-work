@@ -4,6 +4,7 @@ import com.coffeeshop.api.dto.AdditiveResponseDto;
 import com.coffeeshop.api.dto.coffee.CoffeeRequestDto;
 import com.coffeeshop.api.dto.coffee.CoffeeResponseDto;
 import com.coffeeshop.api.mapper.CoffeeMapper;
+import com.coffeeshop.api.service.CoffeeService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -17,42 +18,55 @@ import java.util.List;
 public class CoffeeController {
 
     private final CoffeeMapper coffeeMapper;
+    private final CoffeeService coffeeService;
 
     @PostMapping()
     @Operation(summary = "Создать кофе")
     public CoffeeResponseDto createCoffee(@Valid @RequestBody CoffeeRequestDto coffeeRequestDto) {
-        return null;
+        return coffeeMapper.coffeeEntityToCoffeeResponseDto(
+                coffeeService.createCoffee(coffeeRequestDto.getBeansId(), coffeeRequestDto.getMilkId(), coffeeRequestDto.getSyrupId(), coffeeRequestDto.getSizeId())
+        );
     }
 
     @GetMapping("/bean")
     @Operation(summary = "Получить список зерен")
     public List<AdditiveResponseDto> getBeans() {
-        return null;
+        return coffeeService.getBeans().stream().map(
+                beansEntity -> new AdditiveResponseDto(beansEntity.getId(), beansEntity.getSort(), beansEntity.getPrice())
+        ).toList();
     }
 
     @GetMapping("/milk")
     @Operation(summary = "Получить список видов молока")
     public List<AdditiveResponseDto> getMilks() {
-        return null;
+        return coffeeService.getMilks().stream().map(
+                milkEntity -> new AdditiveResponseDto(milkEntity.getId(), milkEntity.getName(), milkEntity.getPrice())
+        ).toList();
     }
 
     @GetMapping("/syrup")
     @Operation(summary = "Получить список сиропов")
     public List<AdditiveResponseDto> getSyrups() {
-        return null;
+        return coffeeService.getSyrups().stream().map(
+                syrupEntity -> new AdditiveResponseDto(syrupEntity.getId(), syrupEntity.getName(), syrupEntity.getPrice())
+        ).toList();
     }
 
     @GetMapping("/size")
     @Operation(summary = "Получить размеров кофе")
     public List<AdditiveResponseDto> getCoffeeSizes() {
-        return null;
+        return coffeeService.getCoffeeSizes().stream().map(
+                coffeeSizeEntity -> new AdditiveResponseDto(coffeeSizeEntity.getId(), coffeeSizeEntity.getName(), coffeeSizeEntity.getPrice())
+        ).toList();
     }
 
 
     @GetMapping("/sale")
     @Operation(summary = "Получить список кофе по скидке")
     public List<CoffeeResponseDto> getCoffeeWithSale() {
-        return null;
+        return coffeeService.getCoffeeWithSale().stream().map(
+                coffeeMapper::coffeeEntityToCoffeeResponseDto
+        ).toList();
     }
 
 

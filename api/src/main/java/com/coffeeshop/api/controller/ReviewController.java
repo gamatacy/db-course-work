@@ -2,6 +2,8 @@ package com.coffeeshop.api.controller;
 
 import com.coffeeshop.api.dto.review.ReviewRequestDto;
 import com.coffeeshop.api.dto.review.ReviewResponseDto;
+import com.coffeeshop.api.mapper.ReviewMapper;
+import com.coffeeshop.api.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
@@ -14,16 +16,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
 
+    private final ReviewMapper reviewMapper;
+    private final ReviewService reviewService;
+
     @GetMapping
     @Operation(summary = "Посмотреть отзывы")
     public List<ReviewResponseDto> getReviews() {
-        return null;
+        return reviewService.getReviews().stream().map(
+                reviewMapper::reviewEntityToReviewResponseDto
+        ).toList();
     }
 
     @PostMapping
     @Operation(summary = "Создать отзыв")
     public ReviewResponseDto createReview(@Valid @RequestBody ReviewRequestDto reviewRequestDto) {
-        return null;
+        return reviewMapper.reviewEntityToReviewResponseDto(
+                reviewService.createReview(
+                        reviewRequestDto.getClientId(),
+                        reviewRequestDto.getRating(),
+                        reviewRequestDto.getText()
+                )
+        );
     }
 
 }

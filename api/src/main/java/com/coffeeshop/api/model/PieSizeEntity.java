@@ -19,7 +19,7 @@ public class PieSizeEntity {
     private Long id;
 
     @Column(name = "name", nullable = false)
-    private String sort;
+    private String name;
 
     @Column(name = "volume", nullable = false)
     private Float price;

@@ -48,7 +48,7 @@ $$ LANGUAGE plpgsql;
 CREATE TRIGGER create_loyalty_program_for_new_client
     after insert
     ON client_jn
-FOR EACH ROW
+    FOR EACH ROW
 EXECUTE FUNCTION insert_new_loyalty_program();
 
 
@@ -111,6 +111,27 @@ CREATE TRIGGER t_set_registration_date_trigger
 EXECUTE FUNCTION t_set_registration_date();
 
 
+-- Установить дату регистрации
+CREATE OR REPLACE FUNCTION t_set_review_date()
+    RETURNS TRIGGER AS
+$$
+BEGIN
+
+    update review_jn
+    set date = NOW()
+    where review_jn.id = NEW.id;
+
+    RETURN NULL;
+
+END;
+$$ LANGUAGE plpgsql;
+CREATE TRIGGER t_set_review_date_trigger
+    after insert
+    ON review_jn
+    FOR EACH ROW
+EXECUTE FUNCTION t_set_review_date();
+
+
 -- Обновить дату акции
 CREATE OR REPLACE FUNCTION update_promotion_start_date()
     RETURNS TRIGGER AS
@@ -123,7 +144,7 @@ BEGIN
     where promotion_ref.id = NEW.id;
 
     RETURN NULL;
-    END;
+END;
 $$ LANGUAGE plpgsql;
 CREATE TRIGGER update_promotion_start_date_trigger
     BEFORE UPDATE
