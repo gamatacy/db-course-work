@@ -2,13 +2,12 @@ package com.coffeeshop.api.controller;
 
 import com.coffeeshop.api.dto.review.ReviewRequestDto;
 import com.coffeeshop.api.dto.review.ReviewResponseDto;
+import com.coffeeshop.api.mapper.ReviewMapper;
+import com.coffeeshop.api.service.ReviewService;
 import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,16 +16,27 @@ import java.util.List;
 @RequiredArgsConstructor
 public class ReviewController {
 
+    private final ReviewMapper reviewMapper;
+    private final ReviewService reviewService;
+
     @GetMapping
     @Operation(summary = "Посмотреть отзывы")
     public List<ReviewResponseDto> getReviews() {
-        return null;
+        return reviewService.getReviews().stream().map(
+                reviewMapper::reviewEntityToReviewResponseDto
+        ).toList();
     }
 
     @PostMapping
     @Operation(summary = "Создать отзыв")
-    public ReviewResponseDto createReview(@Valid ReviewRequestDto reviewRequestDto) {
-        return null;
+    public ReviewResponseDto createReview(@Valid @RequestBody ReviewRequestDto reviewRequestDto) {
+        return reviewMapper.reviewEntityToReviewResponseDto(
+                reviewService.createReview(
+                        reviewRequestDto.getClientId(),
+                        reviewRequestDto.getRating(),
+                        reviewRequestDto.getText()
+                )
+        );
     }
 
 }

@@ -1,5 +1,6 @@
 package com.coffeeshop.api.dto.order;
 
+import com.coffeeshop.api.dto.client.ClientResponseDto;
 import com.coffeeshop.api.dto.coffee.CoffeeRequestDto;
 import com.coffeeshop.api.dto.pie.PieRequestDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
@@ -18,8 +19,8 @@ public class OrderResponseDto {
     @JsonProperty("address")
     private String address;
     @NotNull
-    @JsonProperty("client_id")
-    private Long clientId;
+    @JsonProperty("client")
+    private ClientResponseDto client;
     @JsonProperty("coffee")
     private List<CoffeeRequestDto> coffee;
     @JsonProperty("pies")
