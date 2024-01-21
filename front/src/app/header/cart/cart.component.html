@@ -1,0 +1,54 @@
+<div class="absolute bg-coffee-light w-[250px] h-[400px] right-0 rounded-bl-xl overflow-auto">
+
+  <div *ngFor="let coffee of orderService.coffeeCart" class="text-white p-5 border-b-[1px]">
+    <div class="relative">
+      Coffee
+
+      <span class="absolute right-3" (click)="deleteCoffee(coffee)">X</span>
+
+      <ul>
+        <li>&ensp;- {{ coffee.bean?.name }}</li>
+        <li *ngIf="coffee.milk != null">&ensp;- {{ coffee.milk?.name}}</li>
+        <li *ngIf="coffee.syrup != null">&ensp;- {{ coffee.syrup?.name}}</li>
+        <li>&ensp;- {{ coffee.size?.name }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div *ngFor="let pie of orderService.piesCart" class="text-white p-5 border-b-[1px]">
+    <div class="relative">
+      Pie
+      <span class="absolute right-3" (click)="deletePie(pie)">X</span>
+      <ul>
+        <li>&ensp;- {{ pie.filling?.name }}</li>
+        <li>&ensp;- {{ pie.size?.name }}</li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="ml-3 flex justify-between w-[90%] text-white p-3">
+    <p>
+      Total price
+    </p>
+    <p>
+      {{ getPrice() }}$
+    </p>
+
+  </div>
+
+  <div class="ml-3 flex justify-center w-[90%] p-3">
+
+    <input type="text" class="rounded-2xl" placeholder="  Address" [(ngModel)]="address">
+
+  </div>
+
+
+  <div class="ml-3 flex justify-center w-[90%] text-white p-3">
+
+    <button (click)="createOrder()" class="bg-idk p-3 rounded-3xl ">
+      Create order
+    </button>
+
+  </div>
+
+</div>

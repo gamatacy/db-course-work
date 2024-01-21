@@ -1,0 +1,29 @@
+<div class="mx-auto my-20 h-[700px] max-w-[1000px] bg-coffee-light rounded-xl p-5 text-white text-xl overflow-auto">
+  <p class="text-center">
+    Shops
+  </p>
+
+
+  <div *ngFor="let review of reviews" class="mx-5 mt-3 border-b-[1px] ">
+
+    <div class="flex justify-between">
+      <span>{{review.client.name}}</span>
+      <span>{{review.date}}</span>
+    </div>
+    <div>
+      <span>
+        {{review.text}}
+      </span>
+    </div>
+    <div>
+      <span>
+        Rating: {{review.rating}}
+      </span>
+    </div>
+
+  </div>
+
+</div>
+
+
+

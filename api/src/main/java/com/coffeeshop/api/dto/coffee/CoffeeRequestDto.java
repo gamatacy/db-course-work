@@ -1,5 +1,6 @@
 package com.coffeeshop.api.dto.coffee;
 
+import com.coffeeshop.api.dto.AdditiveResponseDto;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.Min;
 import jakarta.validation.constraints.NotNull;
@@ -9,16 +10,16 @@ import lombok.Data;
 public class CoffeeRequestDto {
     @NotNull
     @Min(0)
-    @JsonProperty("beans_id")
-    private Long beansId;
+    @JsonProperty("bean")
+    private AdditiveResponseDto beans;
     @Min(0)
-    @JsonProperty("milk_id")
-    private Long milkId;
+    @JsonProperty("milk")
+    private AdditiveResponseDto milk;
     @Min(0)
-    @JsonProperty("syrup_id")
-    private Long syrupId;
+    @JsonProperty("syrup")
+    private AdditiveResponseDto syrup;
     @NotNull
     @Min(0)
-    @JsonProperty("size_id")
-    private Long sizeId;
+    @JsonProperty("size")
+    private AdditiveResponseDto size;
 }

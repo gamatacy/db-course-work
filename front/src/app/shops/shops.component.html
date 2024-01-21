@@ -1,0 +1,36 @@
+<div class="mx-auto my-20 h-[700px] max-w-[1000px] bg-coffee-light rounded-xl p-5 text-white text-xl overflow-auto">
+  <p class="text-center">
+    Shops
+  </p>
+
+
+  <div *ngFor="let shop of shops" class="mx-5 border-b-[1px] ">
+
+    <p (click)="getCats(shop.id)">
+      Address: {{ shop.shop }}
+    </p>
+    <br>
+
+    <div *ngIf="cats.length > 0">
+      <div *ngIf="cats[0].shop.id == shop.id">
+        <div *ngFor="let cat of cats">
+          <div class="flex justify-between">
+            <ul>
+              <li>Gender: {{ cat.gender ? "Male" : "Female" }}</li>
+              <li>Age: {{ cat.age }} years</li>
+            </ul>
+
+            <img src="https://cataas.com/cat/gif" alt="" width="100" height="100">
+
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+
+
+</div>
+
+

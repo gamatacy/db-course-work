@@ -25,6 +25,7 @@ public class ExceptionHandlerImpl {
 
     @ExceptionHandler(Exception.class)
     public ResponseEntity<Object> handleException(Exception ex) {
+        ex.printStackTrace();
 
         return new ResponseEntity<>(ex.getMessage(), HttpStatus.BAD_REQUEST);
     }

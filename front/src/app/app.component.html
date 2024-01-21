@@ -1,0 +1,26 @@
+<div class=" h-[100vh]">
+
+  <div class="absolute left-[50%] -translate-x-1/2">
+    <div class="mt-3 flex justify-between w-[200px]">
+      <p class="mr-2  text-white text-xl p-3" (click)="setOrders()">Orders</p>
+      <p class="mr-2  text-white text-xl p-3" (click)="setReviews()">Reviews</p>
+      <p class=" text-white text-xl p-3" (click)="setCoffee()">Coffee</p>
+      <p class="mr-2  text-white text-xl p-3" (click)="setPie()">Pies</p>
+      <p class="mr-2  text-white text-xl p-3" (click)="setCat()">Shops</p>
+    </div>
+  </div>
+
+  <app-header></app-header>
+  <app-coffee-creator *ngIf="isCoffee"></app-coffee-creator>
+  <app-pie-creator *ngIf="isPie"></app-pie-creator>
+  <app-shops *ngIf="isCat"></app-shops>
+  <app-orders *ngIf="isOrders"></app-orders>
+  <app-reviews *ngIf="isReviews"></app-reviews>
+
+
+  <img class="absolute left-[50%] -translate-x-1/2 max-w-[600px] mt-10" *ngIf="!isCoffee && !isCat && !isPie"
+       src="https://cataas.com/cat/cute/says/ПОСТАВЬТЕ 4 ПОЖАЛУЙСТА?fontColor=white" alt="">
+
+</div>
+
+<router-outlet/>

@@ -7,9 +7,12 @@ import com.coffeeshop.api.mapper.OrderMapper;
 import com.coffeeshop.api.mapper.PieMapper;
 import com.coffeeshop.api.service.OrderService;
 import io.swagger.v3.oas.annotations.Operation;
+import jakarta.transaction.Transactional;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/api/order")
@@ -21,19 +24,17 @@ public class OrderController {
     private final PieMapper pieMapper;
     private final OrderService orderService;
 
+    @Transactional
     @PostMapping
     @Operation(summary = "Создать заказ")
     public OrderResponseDto createOrder(@Valid @RequestBody OrderRequestDto orderRequestDto) {
+        System.out.println(orderRequestDto);
         return orderMapper.orderEntityToOrderResponseDto(
                 orderService.createOrder(
                         orderRequestDto.getClientId(),
                         orderRequestDto.getAddress(),
-                        orderRequestDto.getCoffee().stream().map(
-                                coffeeMapper::coffeeRequestDtoToCoffeeEntity
-                        ).toList(),
-                        orderRequestDto.getPies().stream().map(
-                                pieMapper::pieRequestDtoToPieEntity
-                        ).toList()
+                        orderRequestDto.getCoffee(),
+                        orderRequestDto.getPies()
                 )
         );
     }
@@ -44,6 +45,20 @@ public class OrderController {
         return orderMapper.orderEntityToOrderResponseDto(
                 orderService.getOrderById(orderId)
         );
+    }
+
+    @GetMapping("/all")
+    @Operation(summary = "Получить инофрмацию о заказе")
+    public List<OrderResponseDto> getOrders() {
+        return orderService.getOrders().stream().map(orderMapper::orderEntityToOrderResponseDto).map(
+                orderResponseDto -> {
+                    Long id = orderResponseDto.getId();
+                    orderResponseDto.setPrice(
+                            orderService.calculatePrice(id)
+                    );
+                    return orderResponseDto;
+                }
+        ).toList();
     }
 
 

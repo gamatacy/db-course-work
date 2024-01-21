@@ -1,0 +1,37 @@
+<div class="h-[75px] overflow-hidden bg-coffee-light">
+
+  <div class="flex mx-auto justify-between w-[90%]">
+
+
+    <div *ngIf="clientService.user == null" class="mt-7 text-white text-md">
+      <input type="text" class="rounded-2xl text-coffee-light mr-3 w-[100px]" placeholder="  Name" [(ngModel)]="username">
+      <input type="password" class="rounded-2xl  text-coffee-light w-[100px]" placeholder="  Password" [(ngModel)]="password">
+
+
+          <button (click)="register()" class="bg-idk p-1 ml-3 rounded-3xl ">
+            register
+          </button>
+
+          <button (click)="login()" class="bg-idk p-1 ml-3  rounded-3xl ">
+            login
+          </button>
+
+    </div>
+
+
+
+    <p *ngIf="clientService.user != null" class="mt-5 text-white text-xl">
+      Name: {{ clientService.user.name }}
+      Bonus points: {{ clientService.bonusPoints }}
+    </p>
+
+    <p class="mt-5 text-white text-xl" (click)="setCartVisible()">
+      Cart
+    </p>
+
+
+  </div>
+
+
+</div>
+<app-cart *ngIf="cartVisible"></app-cart>

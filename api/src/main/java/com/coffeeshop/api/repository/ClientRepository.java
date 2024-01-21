@@ -29,8 +29,7 @@ public interface ClientRepository extends JpaRepository<ClientEntity, Long> {
 
 
     @Query(value = """
-            SELECT loyalty_program_jn.bonus_points FROM loyalty_program_jn JOIN client_jn ON loyalty_program_jn.client_id = client_jn.id
-            where client_jn.id = :id
+            SELECT bonus_points FROM loyalty_program_jn where client_id = :id
             """, nativeQuery = true)
     Long getBonusPoints(@Param("id") Long id);
 

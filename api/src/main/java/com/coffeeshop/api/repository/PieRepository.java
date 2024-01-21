@@ -12,11 +12,16 @@ public interface PieRepository extends JpaRepository<PieEntity, Long> {
     @Query(value = """
             SELECT create_or_get_pie(:filling_id, :size_id)
             """, nativeQuery = true)
-    PieEntity createPie(@Param("filling_id") Integer filling, @Param("size_id") Integer size);
+    void createPie(@Param("filling_id") Integer filling, @Param("size_id") Integer size);
 
     @Query(value = """
             SELECT * FROM pie_ref join s333580.pie_sale_ref psr on pie_ref.id = psr.pie_id
             """, nativeQuery = true)
     List<PieEntity> getPiesWithSale();
+
+    @Query(value = """
+            SELECT * from pie_ref where pie_filling_id = :filling_id AND size_id = :size_id
+            """, nativeQuery = true)
+    List<PieEntity> getPiesBy(@Param("filling_id") Integer filling, @Param("size_id") Integer size);
 
 }

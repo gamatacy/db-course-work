@@ -1,0 +1,17 @@
+<div class="mx-auto my-20 h-[700px] max-w-[1000px] bg-coffee-light overflow-auto rounded-xl p-5 text-white text-xl">
+  <p class="text-center">
+    Orders
+  </p>
+
+  <div *ngFor="let order of orders">
+    <div class="flex justify-between">
+      <span>ID: {{order.id}}</span>
+      <span>ADDR: {{order.address}}</span>
+      <span>STATUS: {{order.status.name}}</span>
+<!--      <span>PRICE: {{order.price}}$</span>-->
+    </div>
+  </div>
+
+</div>
+
+

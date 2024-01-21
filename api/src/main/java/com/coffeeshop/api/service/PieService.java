@@ -19,8 +19,8 @@ public class PieService {
     private final FillingRepository fillingRepository;
     private final PieSizeRepository pieSizeRepository;
 
-    public PieEntity createPie(Long fillingId, Long pieSizeId) {
-        return pieRepository.createPie(Math.toIntExact(fillingId), Math.toIntExact(pieSizeId));
+    public void createPie(Long fillingId, Long pieSizeId) {
+        pieRepository.createPie(Math.toIntExact(fillingId), Math.toIntExact(pieSizeId));
     }
 
     public List<FillingEntity> getFillings() {

@@ -17,8 +17,10 @@ public class OrderRequestDto {
     @NotNull
     @JsonProperty("client_id")
     private Long clientId;
+
     @JsonProperty("coffee")
     private List<CoffeeRequestDto> coffee;
     @JsonProperty("pies")
     private List<PieRequestDto> pies;
+
 }

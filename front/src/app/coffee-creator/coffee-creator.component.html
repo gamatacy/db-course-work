@@ -1,0 +1,98 @@
+<div class="mx-auto my-20 h-[700px] max-w-[1000px] bg-coffee-light rounded-xl p-5 text-white text-xl">
+  <p class="text-center">
+    Coffee
+  </p>
+
+   <div class="flex justify-center mt-48">
+     <button class="rounded-xl active:bg-idk-dark bg-idk px-8 py-4" (click)="addToCart()">
+       Add to cart
+     </button>
+   </div>
+
+  <div *ngFor="let allergen of allergens">
+    {{allergen.name}}
+  </div>
+
+  <div class="flex justify-between mt-[175px] text-lg">
+    <div class="bg-idk rounded-xl w-[24%] py-2 px-3">
+
+      <p class="text-center border-b-[1px]">Size</p>
+
+      <div *ngFor="let size of sizes">
+
+        <div *ngIf="size.id != currentSize?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40"
+             (click)="selectSize(size)">
+          <p>{{ size.name }}</p>
+          <p>{{ size.price }}$</p>
+        </div>
+
+        <div *ngIf="size.id == currentSize?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40">
+          <p>{{ size.name }}*</p>
+          <p>{{ size.price }}$</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-idk rounded-xl w-[24%] py-2 px-3">
+
+      <p class="text-center border-b-[1px]">Beans</p>
+
+      <div *ngFor="let bean of beans">
+
+        <div *ngIf="bean.id != currentBeans?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40"
+             (click)="selectBeans(bean)">
+          <p>{{ bean.name }}</p>
+          <p>{{ bean.price }}$</p>
+        </div>
+
+        <div *ngIf="bean.id == currentBeans?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40">
+          <p>{{ bean.name }}*</p>
+          <p>{{ bean.price }}$</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-idk rounded-xl w-[24%] py-2 px-3">
+      <p class="text-center border-b-[1px]">Milk</p>
+      <div *ngFor="let mlk of milk">
+
+        <div *ngIf="mlk.id != currentMilk?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40"
+             (click)="selectMilk(mlk)">
+          <p>{{ mlk.name }}</p>
+          <p>{{ mlk.price }}$</p>
+        </div>
+
+        <div *ngIf="mlk.id == currentMilk?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40">
+          <p>{{ mlk.name }}*</p>
+          <p>{{ mlk.price }}$</p>
+        </div>
+
+      </div>
+    </div>
+
+    <div class="bg-idk rounded-xl w-[24%] py-2 px-3">
+      <p class="text-center border-b-[1px]">Syrup</p>
+
+      <div *ngFor="let srp of syrup">
+
+        <div *ngIf="srp.id != currentSyrup?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40"
+             (click)="selectSyrup(srp)">
+          <p>{{ srp.name }}</p>
+          <p>{{ srp.price }}$</p>
+        </div>
+
+        <div *ngIf="srp.id == currentSyrup?.id" class="text-left flex justify-between p-2 m-2 rounded-3xl max-w-40">
+          <p>{{ srp.name }}*</p>
+          <p>{{ srp.price }}$</p>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+
+</div>
+
+

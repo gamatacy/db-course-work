@@ -191,7 +191,7 @@ $$ LANGUAGE plpgsql;
 -- Создать заказ
 CREATE OR REPLACE FUNCTION create_order(
     in_client_id INTEGER,
-    address varchar(256)
+    in_address varchar(256)
 )
     RETURNS INTEGER AS
 $$
@@ -203,7 +203,7 @@ BEGIN
     SELECT id INTO v_status_id FROM status_ref WHERE name = 'Pending';
 
     INSERT INTO order_jn (client_id, address, date, price, status_id)
-    VALUES (in_client_id, create_order.address, CURRENT_TIMESTAMP, 0.0, v_status_id)
+    VALUES (in_client_id, in_address, CURRENT_TIMESTAMP, 0.0, v_status_id)
     RETURNING id INTO v_order_id;
 
     v_order_total_price_id := calculate_order_total_price(v_order_id);

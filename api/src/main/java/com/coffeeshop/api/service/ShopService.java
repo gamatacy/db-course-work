@@ -17,7 +17,9 @@ public class ShopService {
     private final ShopRepository shopRepository;
 
     public List<CatEntity> getCatsByShopId(Long shopId) {
-        return catRepository.getCatsByShopId(Math.toIntExact(shopId));
+        var cats = catRepository.getCatsByShopId(Math.toIntExact(shopId));
+        System.out.println(cats);
+        return cats;
     }
 
     public List<ShopEntity> getShops() {

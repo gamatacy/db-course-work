@@ -18,8 +18,8 @@ public class CoffeeService {
     private final CoffeeSizeRepository coffeeSizeRepository;
 
 
-    public CoffeeEntity createCoffee(Long beansId, Long milkId, Long syrupId, Long sizeId) {
-        return coffeeRepository.createCoffee(Math.toIntExact(milkId), Math.toIntExact(beansId), Math.toIntExact(syrupId), Math.toIntExact(sizeId));
+    public void createCoffee(Long beansId, Long milkId, Long syrupId, Long sizeId) {
+        coffeeRepository.createCoffee(milkId == null ? null : Math.toIntExact(milkId), Math.toIntExact(beansId), syrupId == null ? null : Math.toIntExact(syrupId), Math.toIntExact(sizeId));
     }
 
     public List<BeansEntity> getBeans() {

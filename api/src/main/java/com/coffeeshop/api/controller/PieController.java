@@ -22,8 +22,8 @@ public class PieController {
 
     @PostMapping()
     @Operation(summary = "Создать кастомный пирожок")
-    public PieResponseDto createPie(@Valid @RequestBody PieRequestDto pieRequestDto) {
-        return pieMapper.pieEntityToPieResponseDto(pieService.createPie(pieRequestDto.getFillingId(), pieRequestDto.getSizeId()));
+    public void createPie(@Valid @RequestBody PieRequestDto pieRequestDto) {
+        pieService.createPie(pieRequestDto.getFilling().getId(), pieRequestDto.getSize().getId());
     }
 
     @GetMapping("/filling")

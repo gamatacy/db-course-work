@@ -22,10 +22,8 @@ public class CoffeeController {
 
     @PostMapping()
     @Operation(summary = "Создать кофе")
-    public CoffeeResponseDto createCoffee(@Valid @RequestBody CoffeeRequestDto coffeeRequestDto) {
-        return coffeeMapper.coffeeEntityToCoffeeResponseDto(
-                coffeeService.createCoffee(coffeeRequestDto.getBeansId(), coffeeRequestDto.getMilkId(), coffeeRequestDto.getSyrupId(), coffeeRequestDto.getSizeId())
-        );
+    public void createCoffee(@Valid @RequestBody CoffeeRequestDto coffeeRequestDto) {
+        coffeeService.createCoffee(coffeeRequestDto.getBeans().getId(), coffeeRequestDto.getMilk() == null ? null : coffeeRequestDto.getMilk().getId(), coffeeRequestDto.getSyrup() == null ? null : coffeeRequestDto.getSyrup().getId(), coffeeRequestDto.getSize().getId());
     }
 
     @GetMapping("/bean")
